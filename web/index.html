@@ -1,0 +1,42 @@
+<meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+    <head><title>WASM Test</title></head>
+    <body>
+        <canvas id="canvasgl" width="640" height="480">
+        </canvas>
+        <script>
+            var $webgl = document.getElementById("canvasgl");
+        </script>
+        <script src="webgl.js"></script>
+    	<script src="wasm.js"></script>
+        <script>
+
+            const env = {
+                ...wasm,
+                ...webgl,
+            }
+
+            fetchAndInstantiate('wasmtest.wasm', { env }).then(instance => {
+                memory = instance.exports.memory;
+                instance.exports.onInit();
+
+                const onAnimationFrame = instance.exports.onAnimationFrame;
+
+                function step(timestamp) {
+                    onAnimationFrame(timestamp);
+                    window.requestAnimationFrame(step);
+                }
+
+                window.requestAnimationFrame(step);
+            })
+
+            function fetchAndInstantiate(url, importObject) {
+                return fetch(url)
+                .then(response => response.arrayBuffer())
+                .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                .then(results => results.instance);
+            }
+        </script>
+    </body>
+</html>
