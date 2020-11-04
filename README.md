@@ -1,5 +1,7 @@
 This is a small test of ziglang+wasm+webgl2+node.
+
 Some WebGL code with unknown license was lifted from https://github.com/raulgrell/tetris (https://github.com/raulgrell).
+This repo is quite similar to https://github.com/raulgrell/zig-wasm-webgl except that it does hosting and uses node.
 
 # Status
 
