@@ -10,9 +10,11 @@ It is also my first zig program!
 
 Make sure you put zig 0.6 in path somewhere such that the command "zig" exists. Then do
 
-´npm install
+```
+npm install
 npm run build
-npm run serve´
+npm run serve
+```
 
 If all went well you can see the result by browsing https://localhost:8000 in chrome/firefox.
 Webgl2 is required.
